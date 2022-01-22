@@ -42,15 +42,15 @@ ui <- navbarPage("University Course Finder",
                               mainPanel(
                                   h3("Introduction"),
                                   htmlOutput("Introduction"),
+                                  h3("Duration"),
+                                  htmlOutput("Duration"),
+                                  h3("Fee (Approximate)"),
+                                  textOutput("Fee"),
                                   h3("Address"),
                                   textOutput("Address"),
                                   h3("Contact"),
                                   htmlOutput("Contact"),
-                                  h3("Duration"),
-                                  htmlOutput("Duration"),
-                                  h3("Fee"),
-                                  textOutput("Fee"),
-                                  h3("Link"),
+                                  h3("Official Website"),
                                   uiOutput("Link")
                               )
                             )
@@ -109,7 +109,13 @@ server <- function(input, output, session) {
       output$Duration <- renderText({
         input$check
         isolate({
-          HTML(data[data$course==input$course, "Duration"])
+          temp_dur <- HTML(data[data$course==input$course, "Duration"])
+          if(temp_dur == "NA"){
+            HTML("The university has not updated this information during the data collection process.
+              Please refer to the latest updates on the university's website.")
+          }else{
+            HTML(paste(temp_dur, "Years (subjected to changes)"))
+          }
         })
       })
       
@@ -121,7 +127,7 @@ server <- function(input, output, session) {
             "The university has not updated this information during the data collection process.
         Please refer to the latest updates on the university's website."
           }else{
-            temp
+            paste("RM ", temp)
           }
         })
       })
