@@ -242,7 +242,7 @@ server <- function(input, output, session) {
     output$logo <- renderImage({
       if (is.null(input$uni))
         return(NULL)
-      if (input$uni == "Universiti Malaya") {
+      if (input$uni == "Universiti Malaya (UM)") {
         return(list(
           src = "University Malaya.png",
           contentType = "image/png",
@@ -266,7 +266,7 @@ server <- function(input, output, session) {
           height = 145,
           alt = "Universiti Kebangsaan Malaysia"
         ))
-      } else if (input$uni == "Universiti Teknologi Malaysia") {
+      } else if (input$uni == "Universiti Teknologi Malaysia (UTM)") {
         return(list(
           src = "UTMlogo.png",
           contentType = "image/png",
@@ -338,31 +338,31 @@ server <- function(input, output, session) {
           height = 145,
           alt = "Universiti Utara Malaysia"
         ))
-      }else if (input$uni == "Universiti Pendidikan Sultan Idris") {
+      }else if (input$uni == "Universiti Pendidikan Sultan Idris (UPSI)") {
         return(list(
           src = "UPSIlogo.png",
           contentType = "image/png",
-          width = 270,
+          width = 200,
           height = 145,
           alt = "Universiti Pendidikan Sultan Idris"
         ))
-      } else if (input$uni == "Universiti Sultan Zainal Abidin") {
+      } else if (input$uni == "Universiti Sultan Zainal Abidin (UNISZA)") {
         return(list(
           src = "UNISZAlogo.png",
           contentType = "image/png",
-          width = 270,
+          width = 200,
           height = 145,
           alt = "Universiti Sultan Zainal Abidin"
         ))
-      } else if (input$uni == "Universiti Pertahanan Nasional Malaysia") {
+      } else if (input$uni == "Universiti Pertahanan Nasional Malaysia (UPNM)") {
         return(list(
           src = "UPNMlogo.png",
           contentType = "image/png",
-          width = 270,
+          width = 200,
           height = 145,
           alt = "Universiti Pertahanan Nasional Malaysia"
         ))
-      } else if (input$uni == "Universiti Teknikal Malaysia Melaka") {
+      } else if (input$uni == "Universiti Teknikal Malaysia Melaka (UTeM)") {
         return(list(
           src = "UTeMlogo.png",
           contentType = "image/png",
