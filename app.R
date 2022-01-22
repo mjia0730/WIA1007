@@ -25,9 +25,9 @@ ui <- navbarPage("University Course Finder",
                               #sidebar with input
                               sidebarPanel(
                                 selectInput(inputId = "uni", label="University", choices = data$uni_name),
+                                actionButton("check", "Search"),
                                 uiOutput("secondSelection"),
-                                imageOutput("logo"),
-                                actionButton("check", "Search")
+                                imageOutput("logo")
                               ),
                               mainPanel(
                                   h3("Introduction"),
@@ -202,6 +202,30 @@ server <- function(input, output, session) {
           width = 145,
           height = 145,
           alt = "Universiti Sains Malaysia"
+        ))
+      } else if (input$uni == "Universiti Kebangsaan Malaysia (UKM)") {
+        return(list(
+          src = "UKMlogo.jpg",
+          contentType = "image/jpg",
+          width = 145,
+          height = 145,
+          alt = "Universiti Kebangsaan Malaysia"
+        ))
+      } else if (input$uni == "Universiti Teknologi Malaysia") {
+        return(list(
+          src = "UTMlogo.png",
+          contentType = "image/png",
+          width = 145,
+          height = 145,
+          alt = "Universiti Teknologi Malaysia"
+        ))
+      } else if (input$uni == "Universiti Malaysia Pahang(UMP)") {
+        return(list(
+          src = "UMPlogo.png",
+          contentType = "image/png",
+          width = 145,
+          height = 145,
+          alt = "Universiti Malaysia Pahang"
         ))
       }
       
