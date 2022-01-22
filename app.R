@@ -9,11 +9,20 @@
 
 library(shiny)
 library(shinyWidgets)
+library(shinythemes)
+
+description_1 <- "University Course Finder App is developed to help all the 
+                  Malaysian high school graduates to access the information of the courses 
+                  provided by Malaysian public universities."
+
+
+description_2 <- "Information including course overviews, fees, duration and university contacts
+                  are available and free to access through the application." 
 
 # Define UI for application 
 ui <- navbarPage("University Course Finder",
                  tabPanel("Finder",
-                          fluidPage(
+                          fluidPage(theme = shinytheme("readable"),
                             tags$style("label{font-family: BentonSans Book}"),
                             #set gradient background color
                             setBackgroundColor(
@@ -40,15 +49,29 @@ ui <- navbarPage("University Course Finder",
                                   textOutput("Duration"),
                                   h3("Fee"),
                                   textOutput("Fee"),
-                                  h3
-                                  ("Link"),
-                                  textOutput("Link")
+                                  h3("Link"),
+                                  uiOutput("Link")
                               )
                             )
                           )),
                  tabPanel("Number of courses in each faculty of university",
                           selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
-                          plotOutput("plot1"))
+                          plotOutput("plot1")),
+                 tabPanel("About",
+                          mainPanel(
+                            h1("Welcome to University Course Finder App!"),
+                            h4(description_1),
+                            h4(description_2)
+                          )),
+                 tabPanel("Contributors",
+                          mainPanel(
+                            h1("Main Contributors"),
+                            h4("OOI JIA MING"),
+                            h4("TAN ZI AN"),
+                            h4("XUYANG"),
+                            h4("MALIQUE"),
+                            h4("INSTRUCTOR:  DR.SALIMAH")
+                          ))
   
 )
 
@@ -58,31 +81,36 @@ server <- function(input, output, session) {
   output$secondSelection <- renderUI({
     selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
   })
+  
+  observeEvent(input$check, {
+    output$Introduction <- renderText({
+      data[data$course==input$course, "Introduction"]
+    })
+    
+    output$Address <- renderText({
+      data[data$course==input$course, "Address"]
+    })
+    
+    output$Contact <- renderText({
+      data[data$course==input$course, "Contact"]
+    })
+    
+    output$Duration <- renderText({
+      data[data$course==input$course, "Duration"]
+    })
+    
+    output$Fee <- renderText({
+      data[data$course==input$course, "Fee"]
+    })
+    
+    output$Link <- renderUI({
+      link <- data[data$course==input$course, "Link"]
+      urls <- a("Course Website", href=link)
+      tagList("", urls)
+    })
 
-  output$Introduction <- renderText({
-    data[data$course==input$course, "Introduction"]
   })
-  
-  output$Address <- renderText({
-    data[data$course==input$course, "Address"]
-  })
-  
-  output$Contact <- renderText({
-    data[data$course==input$course, "Contact"]
-  })
-  
-  output$Duration <- renderText({
-    data[data$course==input$course, "Duration"]
-  })
-  
-  output$Fee <- renderText({
-    data[data$course==input$course, "Fee"]
-  })
-  
-  output$Link <- renderText({
-    data[data$course==input$course, "Link"]
-  })
-  
+
   library(ggplot2)
   output$plot1 <- renderPlot({
     if(input$uni1 == "University of Malaya (UM)"){
