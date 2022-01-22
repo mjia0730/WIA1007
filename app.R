@@ -77,11 +77,11 @@ ui <- navbarPage("University Course Finder",
 
 # Define server logic required 
 server <- function(input, output, session) {
-  
-  output$secondSelection <- renderUI({
-    selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
+  observeEvent(input$check , {
+    output$secondSelection <- renderUI({
+      selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
+    })
   })
-  
   observeEvent(input$check, {
     output$Introduction <- renderText({
       data[data$course==input$course, "Introduction"]
