@@ -10,6 +10,7 @@
 library(shiny)
 library(shinyWidgets)
 library(shinythemes)
+library(shinyjs)
 
 description_1 <- "University Course Finder App is developed to help all the 
                   Malaysian high school graduates to access the information of the courses 
@@ -34,19 +35,19 @@ ui <- navbarPage("University Course Finder",
                               #sidebar with input
                               sidebarPanel(
                                 selectInput(inputId = "uni", label="University", choices = data$uni_name),
-                                actionButton("check", "Search"),
                                 uiOutput("secondSelection"),
+                                actionButton("check", "Search"),
                                 imageOutput("logo")
                               ),
                               mainPanel(
                                   h3("Introduction"),
-                                  textOutput("Introduction"),
+                                  htmlOutput("Introduction"),
                                   h3("Address"),
                                   textOutput("Address"),
                                   h3("Contact"),
-                                  textOutput("Contact"),
+                                  htmlOutput("Contact"),
                                   h3("Duration"),
-                                  textOutput("Duration"),
+                                  htmlOutput("Duration"),
                                   h3("Fee"),
                                   textOutput("Fee"),
                                   h3("Link"),
@@ -78,38 +79,64 @@ ui <- navbarPage("University Course Finder",
 # Define server logic required 
 server <- function(input, output, session) {
   
-  output$secondSelection <- renderUI({
-    selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
-  })
-  
-  observeEvent(input$check, {
-    output$Introduction <- renderText({
-      data[data$course==input$course, "Introduction"]
-    })
-    
-    output$Address <- renderText({
-      data[data$course==input$course, "Address"]
-    })
-    
-    output$Contact <- renderText({
-      data[data$course==input$course, "Contact"]
-    })
-    
-    output$Duration <- renderText({
-      data[data$course==input$course, "Duration"]
-    })
-    
-    output$Fee <- renderText({
-      data[data$course==input$course, "Fee"]
-    })
-    
-    output$Link <- renderUI({
-      link <- data[data$course==input$course, "Link"]
-      urls <- a("Course Website", href=link)
-      tagList("", urls)
-    })
 
-  })
+    output$secondSelection <- renderUI({
+      selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
+    })
+    
+    observeEvent(input$check, {
+      output$Introduction <- renderText({
+        input$check
+        isolate({
+          HTML(data[data$course==input$course, "Introduction"])
+        })
+      })
+      
+      output$Address <- renderText({
+        input$check
+        isolate({
+          data[data$course==input$course, "Address"]
+        })
+      })
+      
+      output$Contact <- renderText({
+        input$check
+        isolate({
+          HTML(data[data$course==input$course, "Contact"])
+        })
+      })
+      
+      output$Duration <- renderText({
+        input$check
+        isolate({
+          HTML(data[data$course==input$course, "Duration"])
+        })
+      })
+      
+      output$Fee <- renderText({
+        input$check
+        isolate({
+          temp <- data[data$course==input$course, "Fee"]
+          if(is.na(temp)){
+            "The university has not updated this information during the data collection process.
+        Please refer to the latest updates on the university's website."
+          }else{
+            temp
+          }
+        })
+      })
+      
+      output$Link <- renderUI({
+        input$check
+        isolate({
+          link <- data[data$course==input$course, "Link"]
+          urls <- a("Course Website", href=link)
+          tagList("", urls)
+        })
+      })
+    })
+    
+
 
   library(ggplot2)
   output$plot1 <- renderPlot({
