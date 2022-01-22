@@ -26,6 +26,7 @@ ui <- navbarPage("University Course Finder",
                               sidebarPanel(
                                 selectInput(inputId = "uni", label="University", choices = data$uni_name),
                                 uiOutput("secondSelection"),
+                                imageOutput("logo"),
                               ),
                               mainPanel(
                                   h3("Introduction"),
@@ -52,6 +53,7 @@ ui <- navbarPage("University Course Finder",
 
 # Define server logic required 
 server <- function(input, output, session) {
+  
   output$secondSelection <- renderUI({
     selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
   })
@@ -179,6 +181,30 @@ server <- function(input, output, session) {
         labs(y= "Number of courses", x="Faculty")+ coord_flip()
     }
   })
+  
+  output$logo <- renderImage({
+    if (is.null(input$uni))
+      return(NULL)
+    if (input$uni == "Universiti Malaya") {
+      return(list(
+        src = "University Malaya.png",
+        contentType = "image/png",
+        width = 145,
+        height = 145,
+        alt = "University Malaya"
+      ))
+    } else if (input$uni == "Universiti Sains Malaysia(USM)") {
+      return(list(
+        src = "USMlogo.png",
+        contentType = "image/png",
+        width = 145,
+        height = 145,
+        alt = "Universiti Sains Malaysia"
+      ))
+    }
+    
+  }, deleteFile = FALSE)
+  
 }
 # Run the application 
 shinyApp(ui = ui, server = server)
