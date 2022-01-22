@@ -33,8 +33,8 @@ ui <- navbarPage("University Course Finder",
                             sidebarLayout(
                               #sidebar with input
                               sidebarPanel(
-                                selectInput(inputId = "uni", label="University", choices = data$uni_name),
                                 actionButton("check", "Search"),
+                                selectInput(inputId = "uni", label="University", choices = data$uni_name),
                                 uiOutput("secondSelection"),
                                 imageOutput("logo")
                               ),
@@ -44,9 +44,9 @@ ui <- navbarPage("University Course Finder",
                                   h3("Address"),
                                   textOutput("Address"),
                                   h3("Contact"),
-                                  textOutput("Contact"),
+                                  htmlOutput("Contact"),
                                   h3("Duration"),
-                                  textOutput("Duration"),
+                                  htmlOutput("Duration"),
                                   h3("Fee"),
                                   textOutput("Fee"),
                                   h3("Link"),
@@ -92,15 +92,22 @@ server <- function(input, output, session) {
     })
     
     output$Contact <- renderText({
-      data[data$course==input$course, "Contact"]
+      HTML(data[data$course==input$course, "Contact"])
     })
     
     output$Duration <- renderText({
-      data[data$course==input$course, "Duration"]
+      HTML(data[data$course==input$course, "Duration"])
     })
     
     output$Fee <- renderText({
-      data[data$course==input$course, "Fee"]
+      temp <- data[data$course==input$course, "Fee"]
+      if(is.na(temp)){
+        "The university has not updated this information during the data collection process.
+        Please refer to the latest updates on the university's website."
+      }else{
+        temp
+      }
+      
     })
     
     output$Link <- renderUI({
