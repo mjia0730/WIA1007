@@ -40,7 +40,7 @@ ui <- navbarPage("University Course Finder",
                               ),
                               mainPanel(
                                   h3("Introduction"),
-                                  textOutput("Introduction"),
+                                  htmlOutput("Introduction"),
                                   h3("Address"),
                                   textOutput("Address"),
                                   h3("Contact"),
@@ -84,7 +84,7 @@ server <- function(input, output, session) {
   
   observeEvent(input$check, {
     output$Introduction <- renderText({
-      data[data$course==input$course, "Introduction"]
+      HTML(data[data$course==input$course, "Introduction"])
     })
     
     output$Address <- renderText({
