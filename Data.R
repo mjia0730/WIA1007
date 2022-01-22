@@ -2,20 +2,16 @@ UNIMAS = read.csv("UNIMAS.csv")
 UMT = read.csv("UMT.csv")
 UMS = read.csv("UMS.csv")
 UUM = read.csv("UUM.csv")
+UM = read.csv("UM.csv")
+USM = read.csv("USM.csv")
+UTM = read.csv("UTM.csv")
+UKM = read.csv("UKM.csv")
+UMP = read.csv("UMP.csv")
+UNIMAP = read.csv("UNIMAP.csv")
+UMK = read.csv("UMK.csv")
+UTHM = read.csv("UTHM.csv")
 
-uni_name = "Univesity Malaysia Terengganu (UMT)"
-UMT =cbind(UMT, uni_name)
-
-uni_name = "Univesity Malaysia Sabah (UMS)"
-UMS =cbind(UMS, uni_name)
-
-uni_name = "Univesity Malaysia Sarawak (UNIMAS)"
-UNIMAS =cbind(UNIMAS, uni_name)
-
-uni_name = "Univesity Utara Malaysia (UUM)"
-UUM =cbind(UUM, uni_name)
-
-data = rbind(UMS, UMT, UNIMAS, UUM)
+data = rbind(UM, USM, UTM, UKM, UNIMAS, UMT, UMS, UUM, UMP, UNIMAP, UMK, UTHM)
 
 ##Faculty
 FacUM = read.csv("UMfac.csv")

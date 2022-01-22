@@ -44,7 +44,7 @@ ui <- navbarPage("University Course Finder",
                               )
                             )
                           )),
-                 tabPanel("Number of courses in each university",
+                 tabPanel("Number of courses in each faculty of university",
                           selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
                           plotOutput("plot1"))
   
