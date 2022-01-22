@@ -27,6 +27,7 @@ ui <- navbarPage("University Course Finder",
                                 selectInput(inputId = "uni", label="University", choices = data$uni_name),
                                 uiOutput("secondSelection"),
                                 imageOutput("logo"),
+                                actionButton("check", "Search")
                               ),
                               mainPanel(
                                   h3("Introduction"),
@@ -182,28 +183,31 @@ server <- function(input, output, session) {
     }
   })
   
-  output$logo <- renderImage({
-    if (is.null(input$uni))
-      return(NULL)
-    if (input$uni == "Universiti Malaya") {
-      return(list(
-        src = "University Malaya.png",
-        contentType = "image/png",
-        width = 145,
-        height = 145,
-        alt = "University Malaya"
-      ))
-    } else if (input$uni == "Universiti Sains Malaysia(USM)") {
-      return(list(
-        src = "USMlogo.png",
-        contentType = "image/png",
-        width = 145,
-        height = 145,
-        alt = "Universiti Sains Malaysia"
-      ))
-    }
-    
-  }, deleteFile = FALSE)
+  observeEvent(input$check,{
+    output$logo <- renderImage({
+      if (is.null(input$uni))
+        return(NULL)
+      if (input$uni == "Universiti Malaya") {
+        return(list(
+          src = "University Malaya.png",
+          contentType = "image/png",
+          width = 145,
+          height = 145,
+          alt = "University Malaya"
+        ))
+      } else if (input$uni == "Universiti Sains Malaysia(USM)") {
+        return(list(
+          src = "USMlogo.png",
+          contentType = "image/png",
+          width = 145,
+          height = 145,
+          alt = "Universiti Sains Malaysia"
+        ))
+      }
+      
+    }, deleteFile = FALSE)
+  })
+
   
 }
 # Run the application 
