@@ -23,7 +23,8 @@ description_2 <- "Information including course overviews, fees, duration and uni
 
 # Define UI for application 
 ui <- navbarPage("University Course Finder",
-                 tabPanel("Finder", #First tab of the shiny app with functions to find course and details of the course
+                 tabPanel("Finder", #First tab of the shiny app with functions 
+                                    #to find course and details of the course
                           fluidPage(theme = shinytheme("readable"),
                             #set the font
                             tags$style("label{font-family: BentonSans Book}"),
@@ -36,17 +37,21 @@ ui <- navbarPage("University Course Finder",
                             sidebarLayout(
                               #sidebar with input
                               sidebarPanel(
-                                #First input where the user can select the university
+                                #First input where the user can select 
+                                #the university
                                 selectInput(inputId = "uni", label="University", choices = data$uni_name),
-                                #Second input where the user can select course based on the university of first input
+                                #Second input where the user can select course 
+                                #based on the university of first input
                                 uiOutput("secondSelection"),
                                 #An action button for the user to press
                                 actionButton("check", "Search"),
-                                #Output of the logo of university selected by user at the first input
+                                #Output of the logo of university selected 
+                                #by user at the first input
                                 imageOutput("logo")
                               ),
-                              mainPanel( #At the main panel, it will shows output of the details based on 
-                                          #the course and university selected by user
+                              mainPanel( #At the main panel, it will shows 
+                                        #output of the details based on 
+                                        #the course and university selected by user
                                   h3("Introduction"),
                                   htmlOutput("Introduction"),
                                   h3("Duration"),
@@ -63,24 +68,28 @@ ui <- navbarPage("University Course Finder",
                             )
                           )),
                  tabPanel("Numbers at A Glance", #Second tab to show plots
-                          #Input where the user can select the university they wanted to search
+                          #Input where the user can select the university 
+                          #they wanted to search
                           selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
                           #Plot button
                           actionButton("checkplot", "Plot!"),
                           h3("Number of courses in each faculty of university"),
-                          #Plot showing number of courses in each faculty of the university selected by user
+                          #Plot showing number of courses in each faculty 
+                          #of the university selected by user
                           plotOutput("plot1"),
                           h3("Fees"),
-                          #Plot showing the fees of
+                          #Plot showing the fees of the courses of the 
+                          #university selected by user
                           plotOutput("plot2")),
                  
-                 tabPanel("About",
+                 tabPanel("About", #Third tab to show description of the shiny app
                           mainPanel(
                             h1("Welcome to University Course Finder App!"),
                             h4(description_1),
                             h4(description_2)
                           )),
-                 tabPanel("Contributors",
+                 tabPanel("Contributors", #Fourth tab to show the contributors
+                                          #of this shiny app
                           mainPanel(
                             h1("Main Contributors"),
                             h4("OOI JIA MING"),
@@ -95,33 +104,34 @@ ui <- navbarPage("University Course Finder",
 # Define server logic required 
 server <- function(input, output, session) {
   
-
+    #Filter the selection for second input based on the first input
     output$secondSelection <- renderUI({
       selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
     })
     
     observeEvent(input$check, {
+      #Show the introduction of the course selected by user
       output$Introduction <- renderText({
         input$check
         isolate({
           HTML(data[data$course==input$course, "Introduction"])
         })
       })
-      
+      #Show the faculty's address of the course selected by user
       output$Address <- renderText({
         input$check
         isolate({
           data[data$course==input$course, "Address"]
         })
       })
-      
+      #Show the faculty's contact of the course selected by user
       output$Contact <- renderText({
         input$check
         isolate({
           HTML(data[data$course==input$course, "Contact"])
         })
       })
-      
+      #Show the duration of the course selected by user
       output$Duration <- renderText({
         input$check
         isolate({
@@ -134,7 +144,7 @@ server <- function(input, output, session) {
           }
         })
       })
-      
+      #Show the fee of the course selected by user
       output$Fee <- renderText({
         input$check
         isolate({
@@ -147,7 +157,7 @@ server <- function(input, output, session) {
           }
         })
       })
-      
+      #Show the website link of the course selected by user
       output$Link <- renderUI({
         input$check
         isolate({
@@ -156,7 +166,7 @@ server <- function(input, output, session) {
           tagList("", urls)
         })
       })
-      
+      #Show the logo of the university selected by user
       output$logo <- renderImage({
         input$check
         isolate({
@@ -300,6 +310,7 @@ server <- function(input, output, session) {
   library(ggplot2)
     
     observeEvent(input$checkplot,{
+      #Plotting a histogram for the fees of the courses of the university selected by user
       output$plot2 <- renderPlot({
         input$checkplot
         isolate({
@@ -379,7 +390,7 @@ server <- function(input, output, session) {
         })
       })  
       
-      
+      #Plotting a lollipop plot for the number of courses of each faculty of the university selected by user
       output$plot1 <- renderPlot({
         
         input$checkplot
