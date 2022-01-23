@@ -12,6 +12,7 @@ library(shinyWidgets)
 library(shinythemes)
 library(dplyr)
 
+#Description to the shiny app is assign the varaibles "description_1" and "description_2"
 description_1 <- "University Course Finder App is developed to help all the 
                   Malaysian high school graduates to access the information of the courses 
                   provided by Malaysian public universities."
@@ -22,8 +23,9 @@ description_2 <- "Information including course overviews, fees, duration and uni
 
 # Define UI for application 
 ui <- navbarPage("University Course Finder",
-                 tabPanel("Finder",
+                 tabPanel("Finder", #First tab of the shiny app with functions to find course and details of the course
                           fluidPage(theme = shinytheme("readable"),
+                            #set the font
                             tags$style("label{font-family: BentonSans Book}"),
                             #set gradient background color
                             setBackgroundColor(
@@ -34,12 +36,17 @@ ui <- navbarPage("University Course Finder",
                             sidebarLayout(
                               #sidebar with input
                               sidebarPanel(
+                                #First input where the user can select the university
                                 selectInput(inputId = "uni", label="University", choices = data$uni_name),
+                                #Second input where the user can select course based on the university of first input
                                 uiOutput("secondSelection"),
+                                #An action button for the user to press
                                 actionButton("check", "Search"),
+                                #Output of the logo of university selected by user at the first input
                                 imageOutput("logo")
                               ),
-                              mainPanel(
+                              mainPanel( #At the main panel, it will shows output of the details based on 
+                                          #the course and university selected by user
                                   h3("Introduction"),
                                   htmlOutput("Introduction"),
                                   h3("Duration"),
@@ -55,12 +62,16 @@ ui <- navbarPage("University Course Finder",
                               )
                             )
                           )),
-                 tabPanel("Numbers at A Glance",
+                 tabPanel("Numbers at A Glance", #Second tab to show plots
+                          #Input where the user can select the university they wanted to search
                           selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
+                          #Plot button
                           actionButton("checkplot", "Plot!"),
                           h3("Number of courses in each faculty of university"),
+                          #Plot showing number of courses in each faculty of the university selected by user
                           plotOutput("plot1"),
                           h3("Fees"),
+                          #Plot showing the fees of
                           plotOutput("plot2")),
                  
                  tabPanel("About",
