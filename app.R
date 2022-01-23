@@ -145,6 +145,143 @@ server <- function(input, output, session) {
           tagList("", urls)
         })
       })
+      
+      output$logo <- renderImage({
+        input$check
+        isolate({
+          if (is.null(input$uni))
+            return(NULL)
+          if (input$uni == "Universiti Malaya (UM)") {
+            return(list(
+              src = "University Malaya.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "University Malaya"
+            ))
+          } else if (input$uni == "Universiti Sains Malaysia(USM)") {
+            return(list(
+              src = "USMlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Sains Malaysia"
+            ))
+          } else if (input$uni == "Universiti Kebangsaan Malaysia (UKM)") {
+            return(list(
+              src = "UKMlogo.jpg",
+              fileType = "image/jpg",
+              width = 145,
+              height = 145,
+              alt = "Universiti Kebangsaan Malaysia"
+            ))
+          } else if (input$uni == "Universiti Teknologi Malaysia (UTM)") {
+            return(list(
+              src = "UTMlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Teknologi Malaysia"
+            ))
+          } else if (input$uni == "Universiti Malaysia Pahang(UMP)") {
+            return(list(
+              src = "UMPlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Malaysia Pahang"
+            ))
+          } else if (input$uni == "Universiti Malaysia Perlis (UniMAP)") {
+            return(list(
+              src = "UNIMAPlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Malaysia Perlis"
+            ))
+          } else if (input$uni == "Universiti Malaysia Kelantan (UMK)") {
+            return(list(
+              src = "UMKlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Malaysia Kelantan"
+            ))
+          } else if (input$uni == "Universiti Tun Hussein Onn Malaysia (UTHM)") {
+            return(list(
+              src = "UTHMlogo.jpg",
+              fileType = "image/jpg",
+              width = 145,
+              height = 145,
+              alt = "Universiti Tun Hussein Onn Malaysia"
+            ))
+          } else if (input$uni == "Univesity Malaysia Sabah (UMS)") {
+            return(list(
+              src = "UMSlogo.jpg",
+              fileType = "image/jpg",
+              width = 145,
+              height = 145,
+              alt = "Universiti Malaysia Sabah"
+            ))
+          } else if (input$uni == "Univesity Malaysia Terengganu (UMT)") {
+            return(list(
+              src = "UMTlogo.jpg",
+              fileType = "image/jpg",
+              width = 145,
+              height = 145,
+              alt = "Universiti Malaysia Terengganu"
+            ))
+          } else if (input$uni == "Univesity Malaysia Sarawak (UNIMAS)") {
+            return(list(
+              src = "UNIMASlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Malaysia Sarawak"
+            ))
+          } else if (input$uni == "Univesity Utara Malaysia (UUM)") {
+            return(list(
+              src = "UUMlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Utara Malaysia"
+            ))
+          }else if (input$uni == "Universiti Pendidikan Sultan Idris (UPSI)") {
+            return(list(
+              src = "UPSIlogo.png",
+              contentType = "image/png",
+              width = 200,
+              height = 145,
+              alt = "Universiti Pendidikan Sultan Idris"
+            ))
+          } else if (input$uni == "Universiti Sultan Zainal Abidin (UNISZA)") {
+            return(list(
+              src = "UNISZAlogo.png",
+              contentType = "image/png",
+              width = 200,
+              height = 145,
+              alt = "Universiti Sultan Zainal Abidin"
+            ))
+          } else if (input$uni == "Universiti Pertahanan Nasional Malaysia (UPNM)") {
+            return(list(
+              src = "UPNMlogo.png",
+              contentType = "image/png",
+              width = 200,
+              height = 145,
+              alt = "Universiti Pertahanan Nasional Malaysia"
+            ))
+          } else if (input$uni == "Universiti Teknikal Malaysia Melaka (UTeM)") {
+            return(list(
+              src = "UTeMlogo.png",
+              contentType = "image/png",
+              width = 145,
+              height = 145,
+              alt = "Universiti Teknikal Malaysia Melaka"
+            ))
+          }
+        })
+      }, deleteFile = FALSE)
     })
     
 
@@ -153,320 +290,192 @@ server <- function(input, output, session) {
     
     observeEvent(input$checkplot,{
       output$plot2 <- renderPlot({
-        if(input$uni1 == "University of Malaya (UM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaya (UM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Sains Malaysia (USM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Kebangsaan Malaysia (UKM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Kebangsaan Malaysia (UKM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Teknologi Malaysia (UTM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Teknologi Malaysia (UTM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Utara Malaysia (UUM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Utara Malaysia (UUM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Malaysia Sabah (UMS)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaysia Sabah (UMS)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Malaysia Terengganu (UMT)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaysia Terengganu (UMT)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Malaysia Sarawak (UNIMAS)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaysia Sarawak (UNIMAS)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Malaysia Pahang (UMP)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaysia Pahang (UMP)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Malaysia Perlis (UniMAP)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaysia Perlis (UniMAP)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Malaysia Kelantan (UMK)"){
-          sub_data <- data02[data02$uni_name == "Universiti Malaysia Kelantan (UMK)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Tun Hussein Onn Malaysia (UTHM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Tun Hussein Onn Malaysia (UTHM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)"){
-          sub_data <- data02[data02$uni_name == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Pendidikan Sultan Idris (UPSI)"){
-          sub_data <- data02[data02$uni_name == "Universiti Pendidikan Sultan Idris (UPSI)",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Sultan Zainal Abidin"){
-          sub_data <- data02[data02$uni_name == "Universiti Sultan Zainal Abidin",]
-          plot_data <- sub_data
-        }
-        else if(input$uni1 == "Universiti Pertahanan Nasional Malaysia (UPNM)"){
-          sub_data <- data02[data02$uni_name == "Universiti Pertahanan Nasional Malaysia (UPNM)",]
-          plot_data <- sub_data
-        }
-        
-        ggplot(plot_data, aes(x=Fee)) +
-          geom_histogram() +
-          stat_bin(bins = 30, binwidth = 30)+
-          labs(y= "Number of Courses", x="Fees") +
-          geom_vline(aes(xintercept=median(Fee)),
-                     color="blue", linetype="dashed", size=1)+
-          theme_gray()
+        input$checkplot
+        isolate({
+          if(input$uni1 == "University of Malaya (UM)"){
+            sub_data <- data[data$uni_name == "Universiti Malaya (UM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
+            sub_data <- data[data$uni_name == "Universiti Sains Malaysia (USM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Kebangsaan Malaysia (UKM)"){
+            sub_data <- data[data$uni_name == "Universiti Kebangsaan Malaysia (UKM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Teknologi Malaysia (UTM)"){
+            sub_data <- data[data$uni_name == "Universiti Teknologi Malaysia (UTM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Utara Malaysia (UUM)"){
+            sub_data <- data[data$uni_name == "Universiti Utara Malaysia (UUM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Malaysia Sabah (UMS)"){
+            sub_data <- data[data$uni_name == "Universiti Malaysia Sabah (UMS)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Malaysia Terengganu (UMT)"){
+            sub_data <- data[data$uni_name == "Universiti Malaysia Terengganu (UMT)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Malaysia Sarawak (UNIMAS)"){
+            sub_data <- data[data$uni_name == "Universiti Malaysia Sarawak (UNIMAS)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Malaysia Pahang (UMP)"){
+            sub_data <- data[data$uni_name == "Universiti Malaysia Pahang (UMP)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Malaysia Perlis (UniMAP)"){
+            sub_data <- data[data$uni_name == "Universiti Malaysia Perlis (UniMAP)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Malaysia Kelantan (UMK)"){
+            sub_data <- data[data$uni_name == "Universiti Malaysia Kelantan (UMK)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Tun Hussein Onn Malaysia (UTHM)"){
+            sub_data <- data[data$uni_name == "Universiti Tun Hussein Onn Malaysia (UTHM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)"){
+            sub_data <- data[data$uni_name == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Pendidikan Sultan Idris (UPSI)"){
+            sub_data <- data[data$uni_name == "Universiti Pendidikan Sultan Idris (UPSI)",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Sultan Zainal Abidin"){
+            sub_data <- data[data$uni_name == "Universiti Sultan Zainal Abidin",]
+            plot_data <- sub_data
+          }
+          else if(input$uni1 == "Universiti Pertahanan Nasional Malaysia (UPNM)"){
+            sub_data <- data[data$uni_name == "Universiti Pertahanan Nasional Malaysia (UPNM)",]
+            plot_data <- sub_data
+          }
+          
+          ggplot(plot_data, aes(x=Fee)) +
+            geom_histogram() +
+            labs(y= "Number of Courses", x="Fees") +
+            geom_vline(aes(xintercept=median(Fee)),
+                       color="blue", linetype="dashed", size=1)+
+            theme_gray()
+        })
       })  
       
       
       output$plot1 <- renderPlot({
-        if(input$uni1 == "University of Malaya (UM)"){
-          ggplot(FacUM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        } 
-        else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
-          ggplot(FacUSM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Kebangsaan Malaysia (UKM)"){
-          ggplot(FacUKM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Teknologi Malaysia (UTM)"){
-          ggplot(FacUTM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Utara Malaysia (UUM)"){
-          ggplot(FacUUM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Malaysia Sabah (UMS)"){
-          ggplot(FacUMS, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Malaysia Terengganu (UMT)"){
-          ggplot(FacUMT, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Malaysia Sarawak (UNIMAS)"){
-          ggplot(FacUNIMAS, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Malaysia Pahang (UMP)"){
-          ggplot(FacUMP, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Malaysia Perlis (UniMAP)"){
-          ggplot(FacUNIMAP, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Malaysia Kelantan (UMK)"){
-          ggplot(FacUMK, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Tun Hussein Onn Malaysia (UTHM)"){
-          ggplot(FacUTHM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)"){
-          ggplot(FacUTEM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Pendidikan Sultan Idris (UPSI)"){
-          ggplot(FacUPSI, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Sultan Zainal Abidin"){
-          ggplot(FacUnisza, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
-        else if(input$uni1 == "Universiti Pertahanan Nasional Malaysia (UPNM)"){
-          ggplot(FacUPNM, aes(x=Faculty,y=Number.of.courses)) +
-            geom_point(size = 3, colour = "black") + 
-            geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
-            labs(y= "Number of courses", x="Faculty")+ coord_flip()
-        }
+        
+        input$checkplot
+        
+        isolate({
+          if(input$uni1 == "University of Malaya (UM)"){
+            ggplot(FacUM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          } 
+          else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
+            ggplot(FacUSM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Kebangsaan Malaysia (UKM)"){
+            ggplot(FacUKM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Teknologi Malaysia (UTM)"){
+            ggplot(FacUTM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Utara Malaysia (UUM)"){
+            ggplot(FacUUM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Malaysia Sabah (UMS)"){
+            ggplot(FacUMS, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Malaysia Terengganu (UMT)"){
+            ggplot(FacUMT, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Malaysia Sarawak (UNIMAS)"){
+            ggplot(FacUNIMAS, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Malaysia Pahang (UMP)"){
+            ggplot(FacUMP, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Malaysia Perlis (UniMAP)"){
+            ggplot(FacUNIMAP, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Malaysia Kelantan (UMK)"){
+            ggplot(FacUMK, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Tun Hussein Onn Malaysia (UTHM)"){
+            ggplot(FacUTHM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)"){
+            ggplot(FacUTEM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Pendidikan Sultan Idris (UPSI)"){
+            ggplot(FacUPSI, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Sultan Zainal Abidin"){
+            ggplot(FacUnisza, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+          else if(input$uni1 == "Universiti Pertahanan Nasional Malaysia (UPNM)"){
+            ggplot(FacUPNM, aes(x=Faculty,y=Number.of.courses)) +
+              geom_point(size = 3, colour = "black") + 
+              geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
+              labs(y= "Number of courses", x="Faculty")+ coord_flip()
+          }
+        })
       })
-      
-      
     })
     
   
   
   observeEvent(input$check,{
-    output$logo <- renderImage({
-      if (is.null(input$uni))
-        return(NULL)
-      if (input$uni == "Universiti Malaya (UM)") {
-        return(list(
-          src = "University Malaya.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "University Malaya"
-        ))
-      } else if (input$uni == "Universiti Sains Malaysia(USM)") {
-        return(list(
-          src = "USMlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Sains Malaysia"
-        ))
-      } else if (input$uni == "Universiti Kebangsaan Malaysia (UKM)") {
-        return(list(
-          src = "UKMlogo.jpg",
-          fileType = "image/jpg",
-          width = 145,
-          height = 145,
-          alt = "Universiti Kebangsaan Malaysia"
-        ))
-      } else if (input$uni == "Universiti Teknologi Malaysia (UTM)") {
-        return(list(
-          src = "UTMlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Teknologi Malaysia"
-        ))
-      } else if (input$uni == "Universiti Malaysia Pahang(UMP)") {
-        return(list(
-          src = "UMPlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Malaysia Pahang"
-        ))
-      } else if (input$uni == "Universiti Malaysia Perlis (UniMAP)") {
-        return(list(
-          src = "UNIMAPlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Malaysia Perlis"
-        ))
-      } else if (input$uni == "Universiti Malaysia Kelantan (UMK)") {
-        return(list(
-          src = "UMKlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Malaysia Kelantan"
-        ))
-      } else if (input$uni == "Universiti Tun Hussein Onn Malaysia (UTHM)") {
-        return(list(
-          src = "UTHMlogo.jpg",
-          fileType = "image/jpg",
-          width = 145,
-          height = 145,
-          alt = "Universiti Tun Hussein Onn Malaysia"
-        ))
-      } else if (input$uni == "Univesity Malaysia Sabah (UMS)") {
-        return(list(
-          src = "UMSlogo.jpg",
-          fileType = "image/jpg",
-          width = 145,
-          height = 145,
-          alt = "Universiti Malaysia Sabah"
-        ))
-      } else if (input$uni == "Univesity Malaysia Terengganu (UMT)") {
-        return(list(
-          src = "UMTlogo.jpg",
-          fileType = "image/jpg",
-          width = 145,
-          height = 145,
-          alt = "Universiti Malaysia Terengganu"
-        ))
-      } else if (input$uni == "Univesity Malaysia Sarawak (UNIMAS)") {
-        return(list(
-          src = "UNIMASlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Malaysia Sarawak"
-        ))
-      } else if (input$uni == "Univesity Utara Malaysia (UUM)") {
-        return(list(
-          src = "UUMlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Utara Malaysia"
-        ))
-      }else if (input$uni == "Universiti Pendidikan Sultan Idris (UPSI)") {
-        return(list(
-          src = "UPSIlogo.png",
-          contentType = "image/png",
-          width = 200,
-          height = 145,
-          alt = "Universiti Pendidikan Sultan Idris"
-        ))
-      } else if (input$uni == "Universiti Sultan Zainal Abidin (UNISZA)") {
-        return(list(
-          src = "UNISZAlogo.png",
-          contentType = "image/png",
-          width = 200,
-          height = 145,
-          alt = "Universiti Sultan Zainal Abidin"
-        ))
-      } else if (input$uni == "Universiti Pertahanan Nasional Malaysia (UPNM)") {
-        return(list(
-          src = "UPNMlogo.png",
-          contentType = "image/png",
-          width = 200,
-          height = 145,
-          alt = "Universiti Pertahanan Nasional Malaysia"
-        ))
-      } else if (input$uni == "Universiti Teknikal Malaysia Melaka (UTeM)") {
-        return(list(
-          src = "UTeMlogo.png",
-          contentType = "image/png",
-          width = 145,
-          height = 145,
-          alt = "Universiti Teknikal Malaysia Melaka"
-        ))
-      }
-      
-    }, deleteFile = FALSE)
+    
   })
 
   
