@@ -362,7 +362,7 @@ server <- function(input, output, session) {
             labs(y= "Number of Courses", x="Fees") +
             geom_vline(aes(xintercept=median(Fee, na.rm=TRUE)),
                        color="white", linetype="dashed", size=1)+
-            geom_text(aes(x=median(Fee, na.rm=TRUE), y= 30, label = "Median"), 
+            geom_text(aes(x=median(Fee, na.rm=TRUE), y= 35, label = "Median"), 
                       colour = "blue", vjust = 1, size = 5) +
             theme_gray()
         })
