@@ -297,7 +297,7 @@ server <- function(input, output, session) {
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
-            sub_data <- data[data$uni_name == "Universiti Sains Malaysia (USM)",]
+            sub_data <- data[data$uni_name == "Universiti Sains Malaysia(USM)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Kebangsaan Malaysia (UKM)"){
@@ -309,23 +309,23 @@ server <- function(input, output, session) {
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Utara Malaysia (UUM)"){
-            sub_data <- data[data$uni_name == "Universiti Utara Malaysia (UUM)",]
+            sub_data <- data[data$uni_name == "Univesity Utara Malaysia (UUM)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Malaysia Sabah (UMS)"){
-            sub_data <- data[data$uni_name == "Universiti Malaysia Sabah (UMS)",]
+            sub_data <- data[data$uni_name == "Univesity Malaysia Sabah (UMS)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Malaysia Terengganu (UMT)"){
-            sub_data <- data[data$uni_name == "Universiti Malaysia Terengganu (UMT)",]
+            sub_data <- data[data$uni_name == "Univesity Malaysia Terengganu (UMT)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Malaysia Sarawak (UNIMAS)"){
-            sub_data <- data[data$uni_name == "Universiti Malaysia Sarawak (UNIMAS)",]
+            sub_data <- data[data$uni_name == "Univesity Malaysia Sarawak (UNIMAS)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Malaysia Pahang (UMP)"){
-            sub_data <- data[data$uni_name == "Universiti Malaysia Pahang (UMP)",]
+            sub_data <- data[data$uni_name == "Universiti Malaysia Pahang(UMP)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Malaysia Perlis (UniMAP)"){
@@ -341,7 +341,7 @@ server <- function(input, output, session) {
             plot_data <- sub_data
           }
           else if(input$uni1 == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)"){
-            sub_data <- data[data$uni_name == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)",]
+            sub_data <- data[data$uni_name == "Universiti Teknikal Malaysia Melaka (UTeM)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Pendidikan Sultan Idris (UPSI)"){
@@ -349,7 +349,7 @@ server <- function(input, output, session) {
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Sultan Zainal Abidin"){
-            sub_data <- data[data$uni_name == "Universiti Sultan Zainal Abidin",]
+            sub_data <- data[data$uni_name == "Universiti Sultan Zainal Abidin (UNISZA)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Pertahanan Nasional Malaysia (UPNM)"){
@@ -360,8 +360,10 @@ server <- function(input, output, session) {
           ggplot(plot_data, aes(x=Fee)) +
             geom_histogram() +
             labs(y= "Number of Courses", x="Fees") +
-            geom_vline(aes(xintercept=median(Fee)),
-                       color="blue", linetype="dashed", size=1)+
+            geom_vline(aes(xintercept=median(Fee, na.rm=TRUE)),
+                       color="white", linetype="dashed", size=1)+
+            geom_text(aes(x=median(Fee, na.rm=TRUE), y= 30, label = "Median"), 
+                      colour = "blue", vjust = 1, size = 5) +
             theme_gray()
         })
       })  
@@ -471,14 +473,6 @@ server <- function(input, output, session) {
         })
       })
     })
-    
-  
-  
-  observeEvent(input$check,{
-    
-  })
-
-  
 }
 # Run the application 
 shinyApp(ui = ui, server = server)
