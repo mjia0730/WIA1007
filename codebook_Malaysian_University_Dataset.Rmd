@@ -1,7 +1,7 @@
 ---
-title: "Codebook for df"
+title: "Codebook for Malaysian_University_Dataset"
 dataMaid: yes
-date: "2022-01-23 23:33:07"
+date: "2022-01-24 14:57:58"
 output:
   html_document:
     df_print: paged
@@ -42,30 +42,34 @@ Number of variables            10
 
 # Codebook summary table
 
----------------------------------------------------------------------------
-Label   Variable             Class         # unique  Missing  Description  
-                                             values                        
-------- -------------------- ----------- ---------- --------- -------------
-        **[X]**              integer            784  0.00 %                
+---------------------------------------------------------------------------------------------------
+Label   Variable             Class         # unique  Missing  Description                          
+                                             values                                                
+------- -------------------- ----------- ---------- --------- -------------------------------------
+        **[X]**              integer            784  0.00 %   Index                                
 
-        **[course]**         character          771  0.00 %                
+        **[course]**         character          771  0.00 %   University course name               
 
-        **[Link]**           character          639  1.40 %                
+        **[Link]**           character          639  1.40 %   Link to the official website of the  
+                                                              course                               
 
-        **[Introduction]**   character          480  0.00 %                
+        **[Introduction]**   character          480  0.00 %   Overview of the course               
 
-        **[Address]**        character           76  0.00 %                
+        **[Address]**        character           76  0.00 %   Address of the university (campus)   
 
-        **[Contact]**        character          110  0.00 %                
+        **[Contact]**        character          110  0.00 %   University / faculty / course        
+                                                              contact                              
 
-        **[Duration]**       integer              6  16.84 %               
+        **[Duration]**       integer              6  16.84 %  Normal course duration (year)        
 
-        **[Fee]**            integer            118  17.09 %               
+        **[Fee]**            integer            118  17.09 %  Complete course tuition fees (RM)    
 
-        **[uni\_name]**      character           16  0.00 %                
+        **[uni\_name]**      character           16  0.00 %   The name of the university           
+                                                              providing the course                 
 
-        **[Fac\_link]**      character           15  0.00 %                
----------------------------------------------------------------------------
+        **[Fac\_link]**      character           15  0.00 %   Link to the official faculty         
+                                                              website                              
+---------------------------------------------------------------------------------------------------
 
 
 
@@ -2235,7 +2239,7 @@ Report generation information:
 
  *  Created by: zianttt (username: `ziant`).
 
- *  Report creation time: Sun Jan 23 2022 23:33:08
+ *  Report creation time: Mon Jan 24 2022 14:57:59
 
  *  Report was run from directory: `C:/Users/ziant/Desktop/coding1/R/WIA1007_02`
 
@@ -2245,10 +2249,11 @@ Report generation information:
 
  *  Platform: x86_64-w64-mingw32/x64 (64-bit)(Windows 10 x64 (build 19042)).
 
- *  Function call: `dataMaid::makeDataReport(data = df, mode = c("summarize", "visualize", 
-"check"), smartNum = FALSE, file = "codebook_df.Rmd", checks = list(
-    character = "showAllFactorLevels", factor = "showAllFactorLevels", 
-    labelled = "showAllFactorLevels", haven_labelled = "showAllFactorLevels", 
-    numeric = NULL, integer = NULL, logical = NULL, Date = NULL), 
-    listChecks = FALSE, maxProbVals = Inf, codebook = TRUE, reportTitle = "Codebook for df")`
+ *  Function call: `dataMaid::makeDataReport(data = Malaysian_University_Dataset, 
+    mode = c("summarize", "visualize", "check"), smartNum = FALSE, 
+    file = "codebook_Malaysian_University_Dataset.Rmd", replace = TRUE, 
+    checks = list(character = "showAllFactorLevels", factor = "showAllFactorLevels", 
+        labelled = "showAllFactorLevels", haven_labelled = "showAllFactorLevels", 
+        numeric = NULL, integer = NULL, logical = NULL, Date = NULL), 
+    listChecks = FALSE, maxProbVals = Inf, codebook = TRUE, reportTitle = "Codebook for Malaysian_University_Dataset")`
 

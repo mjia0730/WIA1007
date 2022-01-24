@@ -1,23 +1,36 @@
 University Course Finder
 ========================================================
-author: 
-date: 
-autosize: true
+transition: rotate
+
+**WIA1007 Group L**
+
+
+| Group Member  | Matrix number  |         
+|:-------------:|:-------------:| 
+| TAN ZI AN | U2102755 | 
+| OOI JIA MING  | U2102759 | 
+| XU YANG |  | 
+| MALIQUE |  | 
+
 
 Why?
 ========================================================
+transition: rotate
+
 **How can I get all universities information in 1 place?**
 
-## This is the question all of us had have during our high schools.
+This is the question all of us had have during our high schools, and perhaps still having now!
 
-## Websites such as “www.studymalaysia.com” & “www.easyuni.my” do provide lists of universities and courses.
+**So we decided to develop this application to help our juniors out.**
 
-## But if you are trying to find them in the university official website...Good luck!
+The University Course Finder App is developed to enable university applicants to have easy access to all the Malaysian public university course information, including course overview, fee, duration and direct link to the official course webpage.  
 
-**So we decided to develop this application to help our juniors out!**
+**Skateholders:** Malaysian university applicants
+
 
 How?
 ========================================================
+transition: rotate
 
 <style>
 .reveal h3 { 
@@ -47,33 +60,35 @@ How?
 
 
 ## To solve this problem, our team applied data science processes such as:
-- Asking questions
-- Data acquisition (web scraping malaysian public university websites)
-- Cleaning data (dealing with inconsistent formats and missing values)
-- Analysing data ( how the data can help future university applicants? )  
-- Presenting data
+- Data acquisition (Web scraping Malaysian public university websites)
+- Cleaning data (Dealing with inconsistent formats and missing values)
+- Analysing data ( How the data can help future university applicants? )  
 
-## *Here is the description of our dataset:*
-## Codebook: <https://rpubs.com/TanZiAn/MalaysianUniCodebook>
+## Dataset description
+- 10 attributes with 784 entries
+- Character attributes: course, Link, Introduction, Address, Contact, uni_name, Fac_link
+- Integer attributes: X, Duration, Fee
 
+## *More detailed descriptions are in the codebook:*
+## <https://rpubs.com/TanZiAn/MalaysianUniversityCodebook>
+
+University Course Finder
 ========================================================
+transition: rotate
 
-## User Interface
 ![Exe](presentation01.gif)  
 
-
-
-Extra features
-========================================================
 
 
 
 Conclusion
 ========================================================
+transition: rotate
+
+This project provides our team a great opportunity to acquire hands-on experiences in developing a data product. Since we built the Malaysian university dataset from scratch, we learnt how to apply the data science knowledge that we have learnt in this course such as web scraping and data cleaning, which are the essential skills of a good data scientist. It was definitely a fascinating experience to kick start our data scientist carrer!
 
 
+## *Link to our project GitHub repository:*
+## <https://github.com/mjia0730/WIA1007>
 
-## *Link to project GitHub repository:*
-
-
-
+## *Link to the shiny app:*
