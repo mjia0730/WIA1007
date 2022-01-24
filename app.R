@@ -7,16 +7,15 @@
 #    http://shiny.rstudio.com/
 #
 
-library(shiny)
+library(shiny) 
 library(shinyWidgets)
-library(shinythemes)
-library(dplyr)
+library(shinythemes) # styling
+library(dplyr) # for data handling
 
-#Description to the shiny app is assign the varaibles "description_1" and "description_2"
+#Description to the shiny app is assign the variables "description_1" and "description_2"
 description_1 <- "University Course Finder App is developed to help all the 
                   Malaysian high school graduates to access the information of the courses 
                   provided by Malaysian public universities."
-
 
 description_2 <- "Information including course overviews, fees, duration and university contacts
                   are available and free to access through the application." 
@@ -25,6 +24,7 @@ description_2 <- "Information including course overviews, fees, duration and uni
 ui <- navbarPage("University Course Finder",
                  tabPanel("Finder", #First tab of the shiny app with functions 
                                     #to find course and details of the course
+                          # Set theme
                           fluidPage(theme = shinytheme("readable"),
                             #set the font
                             tags$style("label{font-family: BentonSans Book}"),
@@ -108,10 +108,14 @@ server <- function(input, output, session) {
       selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
     })
     
+    # check if the actionButton is checked
     observeEvent(input$check, {
       #Show the introduction of the course selected by user
       output$Introduction <- renderText({
-        input$check
+        # check if the actionButton is checked (to prevent button from functioning once only)
+        input$check 
+        
+        # isolate long logics from actionButton check
         isolate({
           HTML(data[data$course==input$course, "Introduction"])
         })
@@ -169,9 +173,11 @@ server <- function(input, output, session) {
       output$logo <- renderImage({
         input$check
         isolate({
+          # Return null if no university is selected
           if (is.null(input$uni))
             return(NULL)
           if (input$uni == "Universiti Malaya (UM)") {
+            # Load and return the university's logo image
             return(list(
               src = "University Malaya.png",
               contentType = "image/png",
@@ -305,19 +311,23 @@ server <- function(input, output, session) {
     })
     
 
-
+  # Import ggplot2 for plotting
   library(ggplot2)
     
+    # Check if the actionButton is checked
     observeEvent(input$checkplot,{
       #Plotting a histogram for the fees of the courses of the university selected by user
       output$plot2 <- renderPlot({
         input$checkplot
+        
+        # Isolate long logics
         isolate({
           if(input$uni1 == "University of Malaya (UM)"){
             sub_data <- data[data$uni_name == "Universiti Malaya (UM)",]
             plot_data <- sub_data
           }
           else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
+            # Subsetting data for corresponding university for plotting
             sub_data <- data[data$uni_name == "Universiti Sains Malaysia(USM)",]
             plot_data <- sub_data
           }
@@ -378,12 +388,14 @@ server <- function(input, output, session) {
             plot_data <- sub_data
           }
           
+          # Plotting fees using ggplot2 histogram plot
           ggplot(plot_data, aes(x=Fee)) +
             geom_histogram() +
             labs(y= "Number of Courses", x="Fees") +
+            # Show meadian fee
             geom_vline(aes(xintercept=median(Fee, na.rm=TRUE)),
                        color="white", linetype="dashed", size=1)+
-            geom_text(aes(x=median(Fee, na.rm=TRUE), y= 35, label = "Median"), 
+            geom_text(aes(x=median(Fee, na.rm=TRUE), y= 35, label = "Median Fee"), 
                       colour = "blue", vjust = 1, size = 5) +
             theme_gray()
         })
@@ -394,8 +406,10 @@ server <- function(input, output, session) {
         
         input$checkplot
         
+        # Isolate long logics from actionButton check
         isolate({
           if(input$uni1 == "University of Malaya (UM)"){
+            # Lollipop plot
             ggplot(FacUM, aes(x=Faculty,y=Number.of.courses)) +
               geom_point(size = 3, colour = "black") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+

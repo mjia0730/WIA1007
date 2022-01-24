@@ -1,10 +1,11 @@
+# For codebook making
 library(dataMaid)
 
-
+# Load dataset
 dataset02 <- read.csv("dataset02.csv")
-
 Malaysian_University_Dataset <- data.frame(dataset02)
 
+# Setting descriptions for each dataset attributes
 attr(Malaysian_University_Dataset$X, "shortDescription") <- "Index"
 attr(Malaysian_University_Dataset$course, "shortDescription") <- "University course name"
 attr(Malaysian_University_Dataset$Link, "shortDescription") <- "Link to the official website of the course"
@@ -16,4 +17,5 @@ attr(Malaysian_University_Dataset$Fee, "shortDescription") <- "Complete course t
 attr(Malaysian_University_Dataset$uni_name, "shortDescription") <- "The name of the university providing the course"
 attr(Malaysian_University_Dataset$Fac_link, "shortDescription") <- "Link to the official faculty website"
 
+# Make codebook for the dataset using dataMaid
 makeCodebook(Malaysian_University_Dataset, replace = TRUE)

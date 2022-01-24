@@ -12,10 +12,11 @@ UMK = read.csv("UMK.csv")
 UTHM = read.csv("UTHM.csv")
 
 data = rbind(UM, USM, UTM, UKM, UNIMAS, UMT, UMS, UUM, UMP, UNIMAP, UMK, UTHM)
-#data = read.csv("dataset.csv")
 
+# Actual dataset
 data = read.csv("dataset02.csv")
-  ##Faculty
+
+##Faculty information to plot number of courses by faculty
 FacUM = read.csv("UMfac.csv")
 FacUSM = read.csv("USMfac.csv")
 FacUKM = read.csv("UKMfac.csv")
