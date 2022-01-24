@@ -1,0 +1,11 @@
+name: Publish Presentation
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/858167/333c1227262f4b928e036c608bd6a977
+bundleId: https://api.rpubs.com/api/v1/document/858167/333c1227262f4b928e036c608bd6a977
+url: http://rpubs.com/TanZiAn/858167
+when: 1643011559.35446
+lastSyncTime: 1643011559.35446

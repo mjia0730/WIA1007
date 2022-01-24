@@ -1,5 +1,6 @@
 University Course Finder
 ========================================================
+title: University Course Finder
 transition: rotate
 
 **WIA1007 Group L**
@@ -20,7 +21,7 @@ This is the question all of us had have during our high schools, and perhaps sti
 
 **So we decided to develop this application to help our juniors out.**
 
-The University Course Finder App is developed to enable university applicants to have easy access to all the Malaysian public university course information, including course overview, fee, duration and direct link to the official course webpage.  
+The University Course Finder App is developed to enable **university applicants** to have easy access to all the Malaysian public university course official information, including course overview, fee, duration and direct link to the official course webpage.  
 
 **Skateholders:** Malaysian university applicants
 
@@ -57,12 +58,12 @@ transition: rotate
 
 
 ## To solve this problem, our team applied data science processes such as:
-- Data acquisition (Web scraping Malaysian public university websites)
-- Cleaning data (Dealing with inconsistent formats and missing values)
+- Data acquisition ( Web scraping Malaysian public university websites )
+- Cleaning data ( Dealing with inconsistent formats and missing values )
 - Analysing data ( How the data can help future university applicants? )  
 
 ## Dataset description
-- 10 attributes with 784 entries
+- **10** attributes with **784** entries
 - Character attributes: course, Link, Introduction, Address, Contact, uni_name, Fac_link
 - Integer attributes: X, Duration, Fee
 
@@ -75,7 +76,8 @@ transition: rotate
 
 ![Exe](presentation01.gif)  
 
-
+## *Link to the shiny app:*
+## <https://tanzian.shinyapps.io/University_Course_Finder/>
 
 
 Conclusion
@@ -85,7 +87,6 @@ transition: rotate
 This project provides our team a great opportunity to acquire hands-on experiences in developing a data product. Since we built the Malaysian university dataset from scratch, we learnt how to apply the data science knowledge that we have learnt in this course such as web scraping and data cleaning, which are the essential skills of a good data scientist. It was definitely a fascinating experience to kick start our data scientist carrer!
 
 
-## *Link to our project GitHub repository:*
+## *Link to our project development GitHub repository:*
 ## <https://github.com/mjia0730/WIA1007>
 
-## *Link to the shiny app:*

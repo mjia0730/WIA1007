@@ -1,0 +1,13 @@
+name: University_Course_Finder
+title: University_Course_Finder
+username:
+account: tanzian
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5495705
+bundleId: 5500910
+url: https://tanzian.shinyapps.io/University_Course_Finder/
+when: 1643010262.36038
+lastSyncTime: 1643010262.36038
+asMultiple: FALSE
+asStatic: FALSE
