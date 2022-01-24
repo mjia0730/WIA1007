@@ -14,8 +14,8 @@ library(dplyr) # for data handling
 
 #Description to the shiny app is assign the variables "description_1" and "description_2"
 description_1 <- "University Course Finder App is developed to help all the 
-                  Malaysian high school graduates to access the information of the courses 
-                  provided by Malaysian public universities."
+                  Malaysian university applicants to access the official information of the courses 
+                  provided by Malaysian public universities easily."
 
 description_2 <- "Information including course overviews, fees, duration and university contacts
                   are available and free to access through the application." 
