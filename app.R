@@ -92,11 +92,10 @@ ui <- navbarPage("University Course Finder",
                                           #of this shiny app
                           mainPanel(
                             h1("Main Contributors"),
-                            h4("OOI JIA MING"),
-                            h4("TAN ZI AN"),
-                            h4("XUYANG"),
-                            h4("MALIQUE"),
-                            h4("INSTRUCTOR:  DR.SALIMAH")
+                            h4("OOI JIA MING (U2102759)"),
+                            h4("TAN ZI AN (U2102755)"),
+                            h4("TAN XU YANG (U2102862)"),
+                            h4("MUHAMMAD ADAM MALIQUE BIN ZAINAL HABSAHRI (U2102866)")
                           ))
   
 )

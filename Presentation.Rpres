@@ -4,16 +4,13 @@ transition: rotate
 
 **WIA1007 Group L**
 
-
-| Group Member  | Matrix number  |         
-|:-------------:|:-------------:| 
-| TAN ZI AN | U2102755 | 
-| OOI JIA MING  | U2102759 | 
-| XU YANG |  | 
-| MALIQUE |  | 
+TAN ZI AN (U2102755)  
+OOI JIA MING (U2102759)  
+TAN XU YANG (U2102862)  
+MUHAMMAD ADAM MALIQUE BIN ZAINAL HABSAHRI (U2102866)
 
 
-Why?
+Why this application?
 ========================================================
 transition: rotate
 
