@@ -20,6 +20,9 @@ description_1 <- "University Course Finder App is developed to help all the
 description_2 <- "Information including course overviews, fees, duration and university contacts
                   are available and free to access through the application." 
 
+description_3 <- "Find detailed course and university information in the 'University Course Finder'tab
+                & get the visualisations of the information in the 'Numbers at A Glance tab'"
+
 # Define UI for application 
 ui <- navbarPage("University Course Finder",
                  tabPanel("Finder", #First tab of the shiny app with functions 
@@ -86,7 +89,8 @@ ui <- navbarPage("University Course Finder",
                           mainPanel(
                             h1("Welcome to University Course Finder App!"),
                             h4(description_1),
-                            h4(description_2)
+                            h4(description_2),
+                            h4(description_3)
                           )),
                  tabPanel("Contributors", #Fourth tab to show the contributors
                                           #of this shiny app
