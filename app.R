@@ -35,6 +35,12 @@ description_3 <- "Find detailed course and university information in the 'Univer
 
 
 ui <- fluidPage(theme = custom_theme, # Set theme
+                tags$style("
+                  p {
+                    text-align: justify;
+                    text-justify: inter-word;
+                  }
+                           "),
                 navbarPage("University Course Finder",
                            tabPanel("Finder", #First tab of the shiny app with functions 
                                     #to find course and details of the course
@@ -43,7 +49,9 @@ ui <- fluidPage(theme = custom_theme, # Set theme
                                       sidebarPanel(
                                         #First input where the user can select 
                                         #the university
-                                        selectInput(inputId = "uni", label="University", choices = data$uni_name),
+                                        selectInput(inputId = "uni", label="University", 
+                                                    choices = c("-Select University-" = "", data$uni_name),
+                                                    selectize = TRUE),
                                         #Second input where the user can select course 
                                         #based on the university of first input
                                         uiOutput("secondSelection"),
@@ -74,7 +82,8 @@ ui <- fluidPage(theme = custom_theme, # Set theme
                 tabPanel("Numbers at A Glance", #Second tab to show plots
                          #Input where the user can select the university 
                          #they wanted to search
-                         selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
+                         selectInput(inputId = "uni1", label="University", 
+                                     c("-Select University-" = "", faculty$uni_name)),
                          #Plot button
                          actionButton("checkplot", "Plot!"),
                          h3("Number of courses in each faculty of university"),
@@ -113,7 +122,9 @@ server <- function(input, output, session) {
   
     #Filter the selection for second input based on the first input
     output$secondSelection <- renderUI({
-      selectInput("course", "Course:", choices = as.character(data[data$uni_name==input$uni,"course"]))
+      selectInput("course", "Course:",  
+                  choices = c("-Select Course-" = "", as.character(data[data$uni_name==input$uni,"course"])),
+                  selectize = TRUE)
     })
     
     # check if the actionButton is checked
@@ -122,7 +133,6 @@ server <- function(input, output, session) {
       output$Introduction <- renderText({
         # check if the actionButton is checked (to prevent button from functioning once only)
         input$check 
-        
         # isolate long logics from actionButton check
         isolate({
           HTML(data[data$course==input$course, "Introduction"])
@@ -146,12 +156,14 @@ server <- function(input, output, session) {
       output$Duration <- renderText({
         input$check
         isolate({
-          temp_dur <- HTML(data[data$course==input$course, "Duration"])
-          if(temp_dur == "NA"){
-            HTML("The university has not updated this information during the data collection process.
+          if(input$course != ""){
+            temp_dur <- HTML(data[data$course==input$course, "Duration"])
+            if(temp_dur == "NA"){
+              HTML("The university has not updated this information during the data collection process.
               Please refer to the latest updates on the university's website.")
-          }else{
-            HTML(paste(temp_dur, "Years (subjected to changes)"))
+            }else{
+              HTML(paste(temp_dur, "Years (subjected to changes)"))
+            }
           }
         })
       })
@@ -159,12 +171,15 @@ server <- function(input, output, session) {
       output$Fee <- renderText({
         input$check
         isolate({
-          temp <- data[data$course==input$course, "Fee"]
-          if(is.na(temp)){
-            "The university has not updated this information during the data collection process.
+          if(input$course != ""){
+            temp <- data[data$course==input$course, "Fee"]
+            if(is.na(temp)){
+              "The university has not updated this information during the data collection process.
         Please refer to the latest updates on the university's website."
-          }else{
-            paste("RM ", temp)
+            }
+            else{
+              paste("RM ", temp)
+            }
           }
         })
       })
@@ -172,18 +187,21 @@ server <- function(input, output, session) {
       output$Link <- renderUI({
         input$check
         isolate({
-          link <- data[data$course==input$course, "Link"]
-          urls <- a("Course Website", href=link)
-          tagList("", urls)
+          if(input$course != ""){
+            link <- data[data$course==input$course, "Link"]
+            urls <- a("Course Website", href=link)
+            tagList("", urls)
+          }
         })
       })
       #Show the logo of the university selected by user
       output$logo <- renderImage({
         input$check
         isolate({
+          
+          outfile <- tempfile(fileext = '.png')
+          
           # Return null if no university is selected
-          if (is.null(input$uni))
-            return(NULL)
           if (input$uni == "Universiti Malaya (UM)") {
             # Load and return the university's logo image
             return(list(
@@ -314,6 +332,13 @@ server <- function(input, output, session) {
               alt = "Universiti Teknikal Malaysia Melaka"
             ))
           }
+          else{
+            return(list(src = outfile,
+                  contentType = 'image/png',
+                  width = 0,
+                  height = 0,
+                  alt = ""))
+          }
         })
       }, deleteFile = FALSE)
     })
@@ -395,15 +420,18 @@ server <- function(input, output, session) {
             sub_data <- data[data$uni_name == "Universiti Pertahanan Nasional Malaysia (UPNM)",]
             plot_data <- sub_data
           }
-          # Plotting fees using ggplot2 histogram plot
-          ggplot(plot_data, aes(x=Fee)) +
-            geom_histogram()+
-            labs(y= "Number of Courses", x="Fees") +
-            # Show meadian fee
-            geom_vline(aes(xintercept=median(Fee, na.rm=TRUE)),
-                       color="white", linetype="dashed", size=1) +
-            geom_text(aes(x=median(Fee, na.rm=TRUE), y= 35, label = "Median Fee"), 
-                      colour = "pink", vjust = 1, size = 5)
+          
+          if(input$uni1 != ""){
+            # Plotting fees using ggplot2 histogram plot
+            ggplot(plot_data, aes(x=Fee)) +
+              geom_histogram()+
+              labs(y= "Number of Courses", x="Fees") +
+              # Show meadian fee
+              geom_vline(aes(xintercept=median(Fee, na.rm=TRUE)),
+                         color="white", linetype="dashed", size=1) +
+              geom_text(aes(x=median(Fee, na.rm=TRUE), y= 35, label = "Median Fee"), 
+                        colour = "pink", vjust = 1, size = 5)
+          }
         })
       })  
       
