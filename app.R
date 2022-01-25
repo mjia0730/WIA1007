@@ -35,12 +35,6 @@ description_3 <- "Find detailed course and university information in the 'Univer
 
 
 ui <- fluidPage(theme = custom_theme, # Set theme
-                tags$style("
-                  p {
-                    text-align: justify;
-                    text-justify: inter-word;
-                  }
-                           "),
                 navbarPage("University Course Finder",
                            tabPanel("Finder", #First tab of the shiny app with functions 
                                     #to find course and details of the course

@@ -30,8 +30,8 @@ jb_course_links = c(jb_course_links_0, jb_course_links_1)
 
 # fac of engineering
 get_overview_1 = function(alink){
-  download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
-  temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
   test_overview = temp_page %>% html_nodes("p, .et_pb_text_inner, p:nth-child(3) , table+ p:nth-child(2)") %>% html_text()
   test_out = ""
   for(ovv in test_overview){
@@ -49,8 +49,8 @@ overviews_1
 
 # fac of build env
 get_overview_2 = function(alink){
-  download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
-  temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
   test_overview = temp_page %>% html_nodes(".et_pb_accordion_item_0 p") %>% html_text()
   test_out = ""
   for(ovv in test_overview){
@@ -74,8 +74,8 @@ length(overviews_3)
 
 # business school
 get_overview_4 = function(alink){
-  download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
-  temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
   test_overview = temp_page %>% html_nodes(".et_pb_text_inner li") %>% html_text()
   test_out = ""
   for(ovv in test_overview){
@@ -150,8 +150,8 @@ kl_overview_1 = "Industrial design is the integration of aesthetics, technology,
 
 
 get_kl_overview_2 = function(alink){
-  download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
-  temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #download.file(alink, destfile = "C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
+  #temp_page = read_html("C:/Users/ziant/Desktop/Y1S1/WIA1007 Data Science/Group Project/Scraping/UTM/Scrap.html")
   test_overview = temp_page %>% html_nodes("p") %>% html_text()
   for(ovv in test_overview){
     if(grepl("Engineering ", ovv) && nchar(ovv) > 80){

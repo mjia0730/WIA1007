@@ -11,7 +11,7 @@ UNIMAP = read.csv("UNIMAP.csv")
 UMK = read.csv("UMK.csv")
 UTHM = read.csv("UTHM.csv")
 
-data = rbind(UM, USM, UTM, UKM, UNIMAS, UMT, UMS, UUM, UMP, UNIMAP, UMK, UTHM)
+#data = rbind(UM, USM, UTM, UKM, UNIMAS, UMT, UMS, UUM, UMP, UNIMAP, UMK, UTHM)
 
 # Actual dataset
 data = read.csv("dataset02.csv")

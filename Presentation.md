@@ -102,10 +102,10 @@ How?
 University Course Finder
 ========================================================
 
-![Exe](presentation01.gif)  
+![Exe](presentation02.gif)  
 
 ## *Link to the shiny app:*
-## <https://tanzian.shinyapps.io/University_Course_Finder/>
+## <https://tanzian.shinyapps.io/UniversityCoursesFinder/>
 
 
 Conclusion
