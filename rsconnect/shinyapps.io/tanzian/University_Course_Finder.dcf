@@ -5,9 +5,9 @@ account: tanzian
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5495705
-bundleId: 5501029
+bundleId: 5505747
 url: https://tanzian.shinyapps.io/University_Course_Finder/
-when: 1643012476.90432
-lastSyncTime: 1643012476.90432
+when: 1643107708.21545
+lastSyncTime: 1643107708.21545
 asMultiple: FALSE
 asStatic: FALSE

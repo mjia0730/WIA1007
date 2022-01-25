@@ -10,7 +10,17 @@
 library(shiny) 
 library(shinyWidgets)
 library(shinythemes) # styling
+library(thematic)
+library(bslib)
 library(dplyr) # for data handling
+
+custom_theme <- bs_theme(
+  # set colors
+  bg = "#002B36", fg = "#EEE8D5", primary = "#2AA198", secondary = "#48DAC6",
+  # bslib also makes it easy to import CSS fonts
+  base_font = font_google("Fira Sans"),
+  heading_font = font_google("Fredoka One")
+)
 
 #Description to the shiny app is assign the variables "description_1" and "description_2"
 description_1 <- "University Course Finder App is developed to help all the 
@@ -23,86 +33,80 @@ description_2 <- "Information including course overviews, fees, duration and uni
 description_3 <- "Find detailed course and university information in the 'University Course Finder'tab
                 & get the visualisations of the information in the 'Numbers at A Glance tab'"
 
-# Define UI for application 
-ui <- navbarPage("University Course Finder",
-                 tabPanel("Finder", #First tab of the shiny app with functions 
+
+ui <- fluidPage(theme = custom_theme, # Set theme
+                navbarPage("University Course Finder",
+                           tabPanel("Finder", #First tab of the shiny app with functions 
                                     #to find course and details of the course
-                          # Set theme
-                          fluidPage(theme = shinytheme("readable"),
-                            #set the font
-                            tags$style("label{font-family: BentonSans Book}"),
-                            #set gradient background color
-                            setBackgroundColor(
-                              color = c("#F7FBFF", "#2171B5"),
-                              gradient = "radial",
-                              direction = c("top", "left")
-                            ),
-                            sidebarLayout(
-                              #sidebar with input
-                              sidebarPanel(
-                                #First input where the user can select 
-                                #the university
-                                selectInput(inputId = "uni", label="University", choices = data$uni_name),
-                                #Second input where the user can select course 
-                                #based on the university of first input
-                                uiOutput("secondSelection"),
-                                #An action button for the user to press
-                                actionButton("check", "Search"),
-                                #Output of the logo of university selected 
-                                #by user at the first input
-                                imageOutput("logo")
-                              ),
-                              mainPanel( #At the main panel, it will shows 
+                                    sidebarLayout(
+                                      #sidebar with input
+                                      sidebarPanel(
+                                        #First input where the user can select 
+                                        #the university
+                                        selectInput(inputId = "uni", label="University", choices = data$uni_name),
+                                        #Second input where the user can select course 
+                                        #based on the university of first input
+                                        uiOutput("secondSelection"),
+                                        #An action button for the user to press
+                                        actionButton("check", "Search"),
+                                        #Output of the logo of university selected 
+                                        #by user at the first input
+                                        imageOutput("logo")
+                                      ),
+                                      mainPanel( #At the main panel, it will shows 
                                         #output of the details based on 
                                         #the course and university selected by user
-                                  h3("Introduction"),
-                                  htmlOutput("Introduction"),
-                                  h3("Duration"),
-                                  htmlOutput("Duration"),
-                                  h3("Fee (Approximate)"),
-                                  textOutput("Fee"),
-                                  h3("Address"),
-                                  textOutput("Address"),
-                                  h3("Contact"),
-                                  htmlOutput("Contact"),
-                                  h3("Official Website"),
-                                  uiOutput("Link")
-                              )
-                            )
-                          )),
-                 tabPanel("Numbers at A Glance", #Second tab to show plots
-                          #Input where the user can select the university 
-                          #they wanted to search
-                          selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
-                          #Plot button
-                          actionButton("checkplot", "Plot!"),
-                          h3("Number of courses in each faculty of university"),
-                          #Plot showing number of courses in each faculty 
-                          #of the university selected by user
-                          plotOutput("plot1"),
-                          h3("Fees"),
-                          #Plot showing the fees of the courses of the 
-                          #university selected by user
-                          plotOutput("plot2")),
-                 
-                 tabPanel("About", #Third tab to show description of the shiny app
-                          mainPanel(
-                            h1("Welcome to University Course Finder App!"),
-                            h4(description_1),
-                            h4(description_2),
-                            h4(description_3)
-                          )),
-                 tabPanel("Contributors", #Fourth tab to show the contributors
-                                          #of this shiny app
-                          mainPanel(
-                            h1("Main Contributors"),
-                            h4("OOI JIA MING (U2102759)"),
-                            h4("TAN ZI AN (U2102755)"),
-                            h4("TAN XU YANG (U2102862)"),
-                            h4("MUHAMMAD ADAM MALIQUE BIN ZAINAL HABSAHRI (U2102866)")
-                          ))
-  
-)
+                                        h3("Introduction"),
+                                        htmlOutput("Introduction"),
+                                        h3("Duration"),
+                                        htmlOutput("Duration"),
+                                        h3("Fee (Approximate)"),
+                                        textOutput("Fee"),
+                                        h3("Address"),
+                                        textOutput("Address"),
+                                        h3("Contact"),
+                                        htmlOutput("Contact"),
+                                        h3("Official Website"),
+                                        uiOutput("Link")
+                                      )
+                                    )
+                           ),
+                tabPanel("Numbers at A Glance", #Second tab to show plots
+                         #Input where the user can select the university 
+                         #they wanted to search
+                         selectInput(inputId = "uni1", label="University", choices = faculty$uni_name),
+                         #Plot button
+                         actionButton("checkplot", "Plot!"),
+                         h3("Number of courses in each faculty of university"),
+                         #Plot showing number of courses in each faculty 
+                         #of the university selected by user
+                         plotOutput("plot1"),
+                         h3("Fees"),
+                         #Plot showing the fees of the courses of the 
+                         #university selected by user
+                         plotOutput("plot2")),
+                
+                tabPanel("About", #Third tab to show description of the shiny app
+                         mainPanel(
+                           h1("Welcome to University Course Finder App!"),
+                           p(description_1),
+                           p(description_2),
+                           p(description_3)
+                         )),
+                tabPanel("Contributors", #Fourth tab to show the contributors
+                         #of this shiny app
+                         mainPanel(
+                           h1("Main Contributors"),
+                           p("OOI JIA MING (U2102759)"),
+                           p("TAN ZI AN (U2102755)"),
+                           p("TAN XU YANG (U2102862)"),
+                           p("MUHAMMAD ADAM MALIQUE BIN ZAINAL HABSAHRI (U2102866)")
+                         ))
+))
+
+
+
+
 
 # Define server logic required 
 server <- function(input, output, session) {
@@ -391,17 +395,15 @@ server <- function(input, output, session) {
             sub_data <- data[data$uni_name == "Universiti Pertahanan Nasional Malaysia (UPNM)",]
             plot_data <- sub_data
           }
-          
           # Plotting fees using ggplot2 histogram plot
           ggplot(plot_data, aes(x=Fee)) +
-            geom_histogram() +
+            geom_histogram()+
             labs(y= "Number of Courses", x="Fees") +
             # Show meadian fee
             geom_vline(aes(xintercept=median(Fee, na.rm=TRUE)),
-                       color="white", linetype="dashed", size=1)+
+                       color="white", linetype="dashed", size=1) +
             geom_text(aes(x=median(Fee, na.rm=TRUE), y= 35, label = "Median Fee"), 
-                      colour = "blue", vjust = 1, size = 5) +
-            theme_gray()
+                      colour = "pink", vjust = 1, size = 5)
         })
       })  
       
@@ -415,97 +417,97 @@ server <- function(input, output, session) {
           if(input$uni1 == "University of Malaya (UM)"){
             # Lollipop plot
             ggplot(FacUM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           } 
           else if(input$uni1 == "Universiti Sains Malaysia (USM)"){
             ggplot(FacUSM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Kebangsaan Malaysia (UKM)"){
             ggplot(FacUKM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Teknologi Malaysia (UTM)"){
             ggplot(FacUTM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Utara Malaysia (UUM)"){
             ggplot(FacUUM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Malaysia Sabah (UMS)"){
             ggplot(FacUMS, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Malaysia Terengganu (UMT)"){
             ggplot(FacUMT, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Malaysia Sarawak (UNIMAS)"){
             ggplot(FacUNIMAS, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Malaysia Pahang (UMP)"){
             ggplot(FacUMP, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Malaysia Perlis (UniMAP)"){
             ggplot(FacUNIMAP, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Malaysia Kelantan (UMK)"){
             ggplot(FacUMK, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Tun Hussein Onn Malaysia (UTHM)"){
             ggplot(FacUTHM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "UNIVERSITI TEKNIKAL MALAYSIA MELAKA (UTeM)"){
             ggplot(FacUTEM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Pendidikan Sultan Idris (UPSI)"){
             ggplot(FacUPSI, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Sultan Zainal Abidin"){
             ggplot(FacUnisza, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
           else if(input$uni1 == "Universiti Pertahanan Nasional Malaysia (UPNM)"){
             ggplot(FacUPNM, aes(x=Faculty,y=Number.of.courses)) +
-              geom_point(size = 3, colour = "black") + 
+              geom_point(size = 3, colour = "pink") + 
               geom_segment( aes(x=Faculty, xend=Faculty, y=0, yend=Number.of.courses))+
               labs(y= "Number of courses", x="Faculty")+ coord_flip()
           }
@@ -513,5 +515,8 @@ server <- function(input, output, session) {
       })
     })
 }
+
+# Enable bslib to render theme 
+thematic_shiny()
 # Run the application 
 shinyApp(ui = ui, server = server)

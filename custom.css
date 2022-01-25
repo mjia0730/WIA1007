@@ -1,0 +1,42 @@
+<style>
+
+.section .reveal .state-background {
+    background: url(foo1.png);
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.reveal h3 { 
+  font-size: 40px;
+  font-import: http://fonts.googleapis.com/css?family=Risque;
+  font-family: 'Risque';
+  color: blue;
+}
+
+.reveal .slides section .slideContent h2 {
+   font-size: 30px;
+   font-import: http://fonts.googleapis.com/css?family=Risque;
+  font-family: 'Risque';
+   font-weight: bold;
+   color: black;
+}
+
+.reveal .slides section .slideContent h1 {
+   font-size: 25px;
+   font-weight: bold;
+   font-import: http://fonts.googleapis.com/css?family=Risque;
+  font-family: 'Risque';
+   color: black;
+}
+
+.reveal ul, 
+.reveal ol {
+    font-size: 25px;
+    font-import: http://fonts.googleapis.com/css?family=Risque;
+  font-family: 'Risque';
+    color: green;
+    list-style-type: square;
+}
+</style>
