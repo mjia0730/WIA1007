@@ -43,6 +43,7 @@ ui <- fluidPage(theme = custom_theme, # Set theme
                                       sidebarPanel(
                                         #First input where the user can select 
                                         #the university
+                                        # Selectize = TRUE to enable placeholder
                                         selectInput(inputId = "uni", label="University", 
                                                     choices = c("-Select University-" = "", data$uni_name),
                                                     selectize = TRUE),
@@ -115,6 +116,7 @@ ui <- fluidPage(theme = custom_theme, # Set theme
 server <- function(input, output, session) {
   
     #Filter the selection for second input based on the first input
+    # Selectize = TRUE to enable placeholder
     output$secondSelection <- renderUI({
       selectInput("course", "Course:",  
                   choices = c("-Select Course-" = "", as.character(data[data$uni_name==input$uni,"course"])),
@@ -150,7 +152,7 @@ server <- function(input, output, session) {
       output$Duration <- renderText({
         input$check
         isolate({
-          if(input$course != ""){
+          if(input$course != ""){ # check placeholder
             temp_dur <- HTML(data[data$course==input$course, "Duration"])
             if(temp_dur == "NA"){
               HTML("The university has not updated this information during the data collection process.
@@ -165,7 +167,7 @@ server <- function(input, output, session) {
       output$Fee <- renderText({
         input$check
         isolate({
-          if(input$course != ""){
+          if(input$course != ""){ # check placeholder
             temp <- data[data$course==input$course, "Fee"]
             if(is.na(temp)){
               "The university has not updated this information during the data collection process.
@@ -181,7 +183,7 @@ server <- function(input, output, session) {
       output$Link <- renderUI({
         input$check
         isolate({
-          if(input$course != ""){
+          if(input$course != ""){ # check placeholder
             link <- data[data$course==input$course, "Link"]
             urls <- a("Course Website", href=link)
             tagList("", urls)
@@ -193,9 +195,10 @@ server <- function(input, output, session) {
         input$check
         isolate({
           
+          # create an empty file (in case no university is selected)
           outfile <- tempfile(fileext = '.png')
           
-          # Return null if no university is selected
+          # Image loading
           if (input$uni == "Universiti Malaya (UM)") {
             # Load and return the university's logo image
             return(list(
@@ -326,6 +329,7 @@ server <- function(input, output, session) {
               alt = "Universiti Teknikal Malaysia Melaka"
             ))
           }
+          # return an empty image if user press search without choosing any course
           else{
             return(list(src = outfile,
                   contentType = 'image/png',
