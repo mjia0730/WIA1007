@@ -90,6 +90,7 @@ How?
 - Data acquisition ( Web scraping Malaysian public university websites )
 - Cleaning data ( Dealing with inconsistent formats and missing values )
 - Analysing data ( How the data can help future university applicants? )  
+- Model Deployment (Creating a shiny app based on the dataset)
 
 ## Dataset description
 - **10** attributes with **784** entries
